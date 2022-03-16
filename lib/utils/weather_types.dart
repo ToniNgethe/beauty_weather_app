@@ -1,0 +1,1 @@
+enum WeatherTypes { cloudy, rainy, sunny }
