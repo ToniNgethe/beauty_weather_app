@@ -1,24 +1,14 @@
 class Assets {
   static const images = "assets/images";
-  static const svgs = "assets/svgs";
+  static const icons = "assets/icons";
 
-  // pngs
-  static const logo = 'assets/images/logo.png';
-  static const splashBg = 'assets/images/splash_bg.png';
-  static const loginOptionsBg = 'assets/images/login_options_bg.png';
-  static const car = 'assets/images/car.png';
-  static const newAccount = 'assets/images/new_acount.png';
-  static const profile  = '$images/profile.png';
+// images
+  static const cloudy = '$images/sea_cloudy.png';
+  static const rainy = '$images/sea_rainy.png';
+  static const sunny = '$images/sea_sunny.png';
 
-  // gif
-  static const loader = 'assets/images/loader.gif';
-
-  // icons
-  static const logoOrange = 'assets/icons/logo_orange.png';
-  static const logoWhite = 'assets/icons/logo_white.png';
-  static const money = '$images/ic_money';
-
-  // svgs
-static const pinIllustration  = '$svgs/pin_illus.svg';
-
+// icons
+  static const clear = '$icons/clear.png';
+  static const rain = '$icons/rain.png';
+  static const partlySunny = '$icons/partly_sunny.png';
 }
