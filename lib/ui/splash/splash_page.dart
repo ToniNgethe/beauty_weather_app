@@ -1,6 +1,5 @@
 import 'package:dvt_weather_app/data/bloc/location/location_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/location/location_state.dart';
-import 'package:dvt_weather_app/di/injector.dart';
 import 'package:dvt_weather_app/ui/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,55 +15,58 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
+  @override
+  void initState() {
+    context.read<LocationBloc>().fetchUserCurrentLocation();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (ctx) => getIt<LocationBloc>()..fetchUserCurrentLocation(),
-      child: BlocConsumer<LocationBloc, LocationState>(
-        listener: (ctx, state) {
-          state.maybeWhen(
-              orElse: () {},
-              locationUpdate: (position) {
-                Navigator.popAndPushNamed(context, HomePage.routeName,
-                    arguments: position);
-              });
-        },
-        builder: (ctx, state) {
-          return Scaffold(
-              backgroundColor: Colors.white,
-              body: SafeArea(
-                  child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.thermostat_auto_outlined,
-                      size: 40,
+    return BlocConsumer<LocationBloc, LocationState>(
+      listener: (ctx, state) {
+        state.maybeWhen(
+            orElse: () {},
+            locationUpdate: (position) {
+              Navigator.popAndPushNamed(context, HomePage.routeName,
+                  arguments: position);
+            });
+      },
+      builder: (ctx, state) {
+        return Scaffold(
+            backgroundColor: Colors.white,
+            body: SafeArea(
+                child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.thermostat_auto_outlined,
+                    size: 40,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    'Welcome to our weather app',
+                    style: TextStyle(fontSize: 16.sp),
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                  if (state.maybeWhen(
+                      orElse: () => false, loading: () => true))
+                    const CircularProgressIndicator(
+                      strokeWidth: 1,
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Text(
-                      'Welcome to our weather app',
-                      style: TextStyle(fontSize: 16.sp),
-                    ),
-                    SizedBox(
-                      height: 50.h,
-                    ),
-                    if (state.maybeWhen(
-                        orElse: () => false, loading: () => true))
-                      const CircularProgressIndicator(
-                        strokeWidth: 1,
-                      ),
-                    state.maybeWhen(
-                        orElse: () => const SizedBox(),
-                        error: (message) => _errorWidget(message, ctx))
-                  ],
-                ),
-              )));
-        },
-      ),
+                  state.maybeWhen(
+                      orElse: () => const SizedBox(),
+                      error: (message) => _errorWidget(message, ctx))
+                ],
+              ),
+            )));
+      },
     );
   }
 

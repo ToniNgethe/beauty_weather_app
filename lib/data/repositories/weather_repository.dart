@@ -13,10 +13,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(this._apiProvider);
 
   @override
-  Future<CurrentWeatherModel> getTodayWeather(double lat, double long) async {
+  Future<CurrentWeatherModel> getTodayWeather(double? lat, double? long) async {
     try {
       final url = EndPoints.baseUrl +
-          'weather?lat=${lat}'
+          'weather?lat=${lat}&units=metric'
               '&lon=${long}'
               '&appid=${EndPoints.appKey}';
 

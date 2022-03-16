@@ -9,9 +9,9 @@ class WeatherBloc extends Cubit<WeatherState> {
 
   WeatherBloc(this._weatherRepository) : super(WeatherState.init());
 
-  void fetchTodayWeather(double lat, double long) async {
+  void fetchTodayWeather(double? lat, double? long) async {
     try {
-      emit(WeatherState.loading());
+      emit(const WeatherState.loading());
       final response = await _weatherRepository.getTodayWeather(lat, long);
       emit(WeatherState.todayWeather(response));
     } catch (e) {
