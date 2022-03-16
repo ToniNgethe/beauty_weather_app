@@ -3,9 +3,9 @@ class Assets {
   static const icons = "assets/icons";
 
 // images
-  static const cloudy = '$images/sea_cloudy.png';
-  static const rainy = '$images/sea_rainy.png';
-  static const sunny = '$images/sea_sunny.png';
+  static const cloudy = '$images/forest_cloudy.png';
+  static const rainy = '$images/forest_rainy.png';
+  static const sunny = '$images/forest_sunny.png';
 
 // icons
   static const clear = '$icons/clear.png';
