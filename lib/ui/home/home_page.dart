@@ -1,8 +1,9 @@
 import 'package:dvt_weather_app/data/bloc/weather/weather_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
 import 'package:dvt_weather_app/data/models/current_weather_model.dart';
-import 'package:dvt_weather_app/utils/app_colors.dart';
-import 'package:dvt_weather_app/utils/assets.dart';
+import 'package:dvt_weather_app/ui/home/widgets/weather_error_widget.dart';
+import 'package:dvt_weather_app/ui/home/widgets/weather_forecast_widget.dart';
+import 'package:dvt_weather_app/ui/home/widgets/weather_loading_widget.dart';
 import 'package:dvt_weather_app/utils/weather_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +25,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     _position = ModalRoute.of(context)?.settings.arguments as Position;
+    fetchWeatherInfo();
+    super.didChangeDependencies();
+  }
+
+  void fetchWeatherInfo() {
     context
         .read<WeatherBloc>()
-        .fetchTodayWeather(_position?.latitude, _position?.longitude);
-    super.didChangeDependencies();
+        .fetchWeatherInfo(_position?.latitude, _position?.longitude);
   }
 
   @override
@@ -40,16 +45,19 @@ class _HomePageState extends State<HomePage> {
               orElse: () => Colors.white,
               todayWeather: (weather) => weather.color),
           body: state.maybeWhen(
-              orElse: () => _buildLoadingWidget(),
-              loading: _buildLoadingWidget,
-              error: (message) {},
+              orElse: () => const WeatherLoadingWidget(),
+              loading: () => const WeatherLoadingWidget(),
+              error: (message) => WeatherErrorWidget(
+                    message: message,
+                    onRetry: () => fetchWeatherInfo(),
+                  ),
               todayWeather: (weather) => _buildWeatherWidget(weather)),
         );
       },
     );
   }
 
-  Widget _buildWeatherWidget(CurrentWeatherModel currentWeatherModel) {
+  Widget _buildWeatherWidget(WeatherModel currentWeatherModel) {
     return Column(
       children: [
         _todayWeather(currentWeatherModel),
@@ -57,60 +65,14 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
           thickness: 1,
         ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (ctx, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Monday',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.white),
-                    ),
-                    Image.asset(Assets.clear),
-                    Text(
-                      '40',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.white),
-                    )
-                  ],
-                ),
-              );
-            },
-            itemCount: 5,
-          ),
+        WeatherForecastWidget(
+          position: _position!,
         )
       ],
     );
   }
 
-  Widget _buildLoadingWidget() {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              'Fetching your current location weather information',
-              style: TextStyle(color: Colors.grey, fontSize: 16.sp),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            height: 14.h,
-          ),
-          const CircularProgressIndicator(
-            strokeWidth: 1,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _todayWeather(CurrentWeatherModel currentWeatherModel) {
+  Widget _todayWeather(WeatherModel currentWeatherModel) {
     return Column(
       children: [
         Stack(
@@ -166,21 +128,25 @@ class _HomePageState extends State<HomePage> {
   Column buildMinMax(String value, String text) {
     return Column(
       children: [
-        Row(
-          children: [
-            Text(
-              value,
-              style: TextStyle(fontSize: 18.sp, color: Colors.white),
-            ),
-            Text(
-              '°',
-              style: TextStyle(fontSize: 18.sp, color: Colors.white),
-            )
-          ],
-        ),
+        textWithDegreeSymbol(value),
         Text(
           text,
           style: TextStyle(fontSize: 14.sp, color: Colors.white),
+        )
+      ],
+    );
+  }
+
+  Row textWithDegreeSymbol(String value) {
+    return Row(
+      children: [
+        Text(
+          value,
+          style: TextStyle(fontSize: 18.sp, color: Colors.white),
+        ),
+        Text(
+          '°',
+          style: TextStyle(fontSize: 18.sp, color: Colors.white),
         )
       ],
     );

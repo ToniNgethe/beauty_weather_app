@@ -7,13 +7,23 @@ import 'package:injectable/injectable.dart';
 class WeatherBloc extends Cubit<WeatherState> {
   final WeatherRepository _weatherRepository;
 
-  WeatherBloc(this._weatherRepository) : super(WeatherState.init());
+  WeatherBloc(this._weatherRepository) : super(const WeatherState.init());
 
-  void fetchTodayWeather(double? lat, double? long) async {
+  void fetchWeatherInfo(double? lat, double? long) async {
     try {
       emit(const WeatherState.loading());
       final response = await _weatherRepository.getTodayWeather(lat, long);
       emit(WeatherState.todayWeather(response));
+    } catch (e) {
+      emit(const WeatherState.error("Unable to fetch today's weather"));
+    }
+  }
+
+  void fetchForecastWeather(double? lat, double? long) async {
+    try {
+      emit(const WeatherState.loading());
+      final response = await _weatherRepository.getFiveDaysWeather(lat, long);
+      emit(WeatherState.forecastWeather(response));
     } catch (e) {
       emit(const WeatherState.error("Unable to fetch today's weather"));
     }

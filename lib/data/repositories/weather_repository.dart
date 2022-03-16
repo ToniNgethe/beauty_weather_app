@@ -5,6 +5,7 @@ import 'package:dvt_weather_app/data/network/end_points.dart';
 import 'package:dvt_weather_app/data/repositories/weather_repository_impl.dart';
 import 'package:dvt_weather_app/utils/weather_types.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 @Injectable(as: WeatherRepository)
 class WeatherRepositoryImpl implements WeatherRepository {
@@ -13,7 +14,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(this._apiProvider);
 
   @override
-  Future<CurrentWeatherModel> getTodayWeather(double? lat, double? long) async {
+  Future<WeatherModel> getTodayWeather(double? lat, double? long) async {
     try {
       final url = EndPoints.baseUrl +
           'weather?lat=${lat}&units=metric'
@@ -23,10 +24,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final response = await _apiProvider.get(url);
       final weatherDtoObject = CurrentWeatherDtoResponse.fromJson(response);
 
-      return CurrentWeatherModel(
-          weatherDtoObject.main?.tempMax,
-          weatherDtoObject.main?.tempMin,
-          weatherDtoObject.main?.temp,
+      return WeatherModel(
+          weatherDtoObject.main?.tempMax?.toDouble(),
+          weatherDtoObject.main?.tempMin?.toDouble(),
+          weatherDtoObject.main?.temp?.toDouble(),
           _getWeatherType(weatherDtoObject));
     } catch (e) {
       rethrow;
@@ -49,6 +50,46 @@ class WeatherRepositoryImpl implements WeatherRepository {
       return WeatherTypes.cloudy;
     } else {
       return WeatherTypes.sunny;
+    }
+  }
+
+  @override
+  Future<List<WeatherModel>> getFiveDaysWeather(
+      double? lat, double? long) async {
+    try {
+      // fetch data from api
+      final url = EndPoints.baseUrl +
+          'forecast?lat=${lat}&units=metric'
+              '&lon=${long}'
+              '&appid=${EndPoints.appKey}';
+      final response = await _apiProvider.get(url);
+
+      final weatherList = response['list']
+          .map((element) => CurrentWeatherDtoResponse.fromJson(element))
+          .toList();
+
+      // map list to only one result per day
+      Map<String, WeatherModel> weatherModelList = {};
+      for (var element in weatherList) {
+        // format date
+        String day = DateFormat("EEEE").format(
+            DateTime.fromMillisecondsSinceEpoch(element.dt!.toInt() * 1000));
+        // check if date already exists
+        if (!weatherModelList.containsKey(day)) {
+          final weatherModel = WeatherModel(
+              element.main?.tempMax?.toDouble(),
+              element.main?.tempMin?.toDouble(),
+              element.main?.temp?.toDouble(),
+              _getWeatherType(element),
+              day: day);
+          weatherModelList[day] = weatherModel;
+        }
+      }
+
+      // return modified list
+      return weatherModelList.values.toList();
+    } catch (e) {
+      rethrow;
     }
   }
 }

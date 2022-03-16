@@ -3,16 +3,17 @@ import 'package:dvt_weather_app/utils/assets.dart';
 import 'package:dvt_weather_app/utils/weather_types.dart';
 import 'package:flutter/cupertino.dart';
 
-class CurrentWeatherModel {
+class WeatherModel {
   WeatherTypes? weatherType;
   double? temp;
   double? min;
   double? max;
+  String? day;
 
-  CurrentWeatherModel(this.max, this.min, this.temp, this.weatherType) {}
+  WeatherModel(this.max, this.min, this.temp, this.weatherType,{this.day}) {}
 }
 
-extension WeatherAssets on CurrentWeatherModel {
+extension WeatherAssets on WeatherModel {
   String? get asset {
     switch (weatherType) {
       case WeatherTypes.rainy:
@@ -22,6 +23,18 @@ extension WeatherAssets on CurrentWeatherModel {
       case WeatherTypes.sunny:
         return Assets.sunny;
       default: return null;
+    }
+  }
+
+  String get icon {
+    switch (weatherType) {
+      case WeatherTypes.rainy:
+        return Assets.rain;
+      case WeatherTypes.cloudy:
+        return Assets.partlySunny;
+      case WeatherTypes.sunny:
+        return Assets.clear;
+      default: return '';
     }
   }
 

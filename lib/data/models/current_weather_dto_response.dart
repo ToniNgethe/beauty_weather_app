@@ -1,24 +1,22 @@
 class CurrentWeatherDtoResponse {
   CurrentWeatherDtoResponse({
-      Coord? coord, 
+      Coord? coord,
       List<Weather>? weather, 
       String? base, 
-      Main? main, 
-      int? visibility, 
-      Wind? wind, 
-      Clouds? clouds, 
-      int? dt, 
-      Sys? sys, 
-      int? timezone, 
-      int? id, 
-      String? name, 
-      int? cod,}){
+      Main? main,
+    num? visibility,
+      Clouds? clouds,
+    num? dt,
+      Sys? sys,
+    num? timezone,
+    num? id,
+      String? name,
+    num? cod,}){
     _coord = coord;
     _weather = weather;
     _base = base;
     _main = main;
     _visibility = visibility;
-    _wind = wind;
     _clouds = clouds;
     _dt = dt;
     _sys = sys;
@@ -39,7 +37,6 @@ class CurrentWeatherDtoResponse {
     _base = json['base'];
     _main = json['main'] != null ? Main.fromJson(json['main']) : null;
     _visibility = json['visibility'];
-    _wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
     _clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
     _dt = json['dt'];
     _sys = json['sys'] != null ? Sys.fromJson(json['sys']) : null;
@@ -52,29 +49,27 @@ class CurrentWeatherDtoResponse {
   List<Weather>? _weather;
   String? _base;
   Main? _main;
-  int? _visibility;
-  Wind? _wind;
+  num? _visibility;
   Clouds? _clouds;
-  int? _dt;
+  num? _dt;
   Sys? _sys;
-  int? _timezone;
-  int? _id;
+  num? _timezone;
+  num? _id;
   String? _name;
-  int? _cod;
+  num? _cod;
 
   Coord? get coord => _coord;
   List<Weather>? get weather => _weather;
   String? get base => _base;
   Main? get main => _main;
-  int? get visibility => _visibility;
-  Wind? get wind => _wind;
+  num? get visibility => _visibility;
   Clouds? get clouds => _clouds;
-  int? get dt => _dt;
+  num? get dt => _dt;
   Sys? get sys => _sys;
-  int? get timezone => _timezone;
-  int? get id => _id;
+  num? get timezone => _timezone;
+  num? get id => _id;
   String? get name => _name;
-  int? get cod => _cod;
+  num? get cod => _cod;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -89,9 +84,6 @@ class CurrentWeatherDtoResponse {
       map['main'] = _main?.toJson();
     }
     map['visibility'] = _visibility;
-    if (_wind != null) {
-      map['wind'] = _wind?.toJson();
-    }
     if (_clouds != null) {
       map['clouds'] = _clouds?.toJson();
     }
@@ -110,11 +102,11 @@ class CurrentWeatherDtoResponse {
 
 class Sys {
   Sys({
-      int? type, 
-      int? id, 
-      String? country, 
-      int? sunrise, 
-      int? sunset,}){
+    num? type,
+    num? id,
+      String? country,
+    num? sunrise,
+    num? sunset,}){
     _type = type;
     _id = id;
     _country = country;
@@ -129,17 +121,17 @@ class Sys {
     _sunrise = json['sunrise'];
     _sunset = json['sunset'];
   }
-  int? _type;
-  int? _id;
+  num? _type;
+  num? _id;
   String? _country;
-  int? _sunrise;
-  int? _sunset;
+  num? _sunrise;
+  num? _sunset;
 
-  int? get type => _type;
-  int? get id => _id;
+  num? get type => _type;
+  num? get id => _id;
   String? get country => _country;
-  int? get sunrise => _sunrise;
-  int? get sunset => _sunset;
+  num? get sunrise => _sunrise;
+  num? get sunset => _sunset;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -155,16 +147,16 @@ class Sys {
 
 class Clouds {
   Clouds({
-      int? all,}){
+    num? all,}){
     _all = all;
 }
 
   Clouds.fromJson(dynamic json) {
     _all = json['all'];
   }
-  int? _all;
+  num? _all;
 
-  int? get all => _all;
+  num? get all => _all;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -174,39 +166,13 @@ class Clouds {
 
 }
 
-class Wind {
-  Wind({
-      double? speed, 
-      int? deg,}){
-    _speed = speed;
-    _deg = deg;
-}
-
-  Wind.fromJson(dynamic json) {
-    _speed = json['speed'];
-    _deg = json['deg'];
-  }
-  double? _speed;
-  int? _deg;
-
-  double? get speed => _speed;
-  int? get deg => _deg;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['speed'] = _speed;
-    map['deg'] = _deg;
-    return map;
-  }
-
-}
 
 class Main {
   Main({
-      double? temp, 
-      double? feelsLike, 
-      double? tempMin, 
-      double? tempMax, 
+    num? temp,
+    num? feelsLike,
+    num? tempMin,
+    num? tempMax,
       int? pressure, 
       int? humidity,}){
     _temp = temp;
@@ -225,19 +191,19 @@ class Main {
     _pressure = json['pressure'];
     _humidity = json['humidity'];
   }
-  double? _temp;
-  double? _feelsLike;
-  double? _tempMin;
-  double? _tempMax;
-  int? _pressure;
-  int? _humidity;
+  num? _temp;
+  num? _feelsLike;
+  num? _tempMin;
+  num? _tempMax;
+  num? _pressure;
+  num? _humidity;
 
-  double? get temp => _temp;
-  double? get feelsLike => _feelsLike;
-  double? get tempMin => _tempMin;
-  double? get tempMax => _tempMax;
-  int? get pressure => _pressure;
-  int? get humidity => _humidity;
+  num? get temp => _temp;
+  num? get feelsLike => _feelsLike;
+  num? get tempMin => _tempMin;
+  num? get tempMax => _tempMax;
+  num? get pressure => _pressure;
+  num? get humidity => _humidity;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -293,8 +259,8 @@ class Weather {
 
 class Coord {
   Coord({
-      double? lon, 
-      double? lat,}){
+    num? lon,
+    num? lat,}){
     _lon = lon;
     _lat = lat;
 }
@@ -303,11 +269,11 @@ class Coord {
     _lon = json['lon'];
     _lat = json['lat'];
   }
-  double? _lon;
-  double? _lat;
+  num? _lon;
+  num? _lat;
 
-  double? get lon => _lon;
-  double? get lat => _lat;
+  num? get lon => _lon;
+  num? get lat => _lat;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
