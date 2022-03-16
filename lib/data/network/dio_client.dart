@@ -13,7 +13,7 @@ abstract class DioClient {
 
   Dio _getDio() {
     final options = BaseOptions(
-      baseUrl: Url.BASE_URL,
+      baseUrl: EndPoints.baseUrl,
       connectTimeout: 50000,
       receiveTimeout: 30000,
     );
