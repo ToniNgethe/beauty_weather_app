@@ -25,6 +25,7 @@ dependencies:
   google_fonts: ^2.3.1
   geolocator: ^8.2.0
   intl: ^0.17.0
+  floor: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +37,7 @@ dev_dependencies:
   dart_code_metrics: ^4.10.1
   injectable_generator:
   freezed:
+  floor_generator: ^1.2.0
 
 flutter:
   uses-material-design: true

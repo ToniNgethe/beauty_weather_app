@@ -15,7 +15,7 @@ class WeatherLoadingWidget extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Text(
               'Fetching your current location weather information',
-              style: TextStyle(color: Colors.grey, fontSize: 16.sp),
+              style: TextStyle(color: Colors.black54, fontSize: 16.sp),
               textAlign: TextAlign.center,
             ),
           ),

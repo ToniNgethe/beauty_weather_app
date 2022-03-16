@@ -1,5 +1,5 @@
-import 'package:dvt_weather_app/data/models/current_weather_dto_response.dart';
-import 'package:dvt_weather_app/data/models/current_weather_model.dart';
+import 'package:dvt_weather_app/data/repositories/dto/current_weather_dto_response.dart';
+import 'package:dvt_weather_app/data/models/weather_model.dart';
 import 'package:dvt_weather_app/data/network/api_provider.dart';
 import 'package:dvt_weather_app/data/network/end_points.dart';
 import 'package:dvt_weather_app/data/repositories/weather_repository_impl.dart';
@@ -25,6 +25,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final weatherDtoObject = CurrentWeatherDtoResponse.fromJson(response);
 
       return WeatherModel(
+          null,
           weatherDtoObject.main?.tempMax?.toDouble(),
           weatherDtoObject.main?.tempMin?.toDouble(),
           weatherDtoObject.main?.temp?.toDouble(),
@@ -34,22 +35,21 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
   }
 
-  WeatherTypes _getWeatherType(
-      CurrentWeatherDtoResponse currentWeatherDtoResponse) {
+  int _getWeatherType(CurrentWeatherDtoResponse currentWeatherDtoResponse) {
     // if no weather return sunny by default
     if (currentWeatherDtoResponse.weather?.isEmpty == true) {
-      return WeatherTypes.sunny;
+      return WeatherTypes.sunny.intValue;
     }
     // use first object
     final weather = currentWeatherDtoResponse.weather?[0].main?.toLowerCase();
     if (weather!.contains('sun')) {
-      return WeatherTypes.sunny;
+      return WeatherTypes.sunny.intValue;
     } else if (weather.contains('rain')) {
-      return WeatherTypes.rainy;
+      return WeatherTypes.rainy.intValue;
     } else if (weather.contains('cloud')) {
-      return WeatherTypes.cloudy;
+      return WeatherTypes.cloudy.intValue;
     } else {
-      return WeatherTypes.sunny;
+      return WeatherTypes.sunny.intValue;
     }
   }
 
@@ -77,6 +77,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
         // check if date already exists
         if (!weatherModelList.containsKey(day)) {
           final weatherModel = WeatherModel(
+              null,
               element.main?.tempMax?.toDouble(),
               element.main?.tempMin?.toDouble(),
               element.main?.temp?.toDouble(),

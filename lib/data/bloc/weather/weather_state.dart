@@ -1,4 +1,4 @@
-import 'package:dvt_weather_app/data/models/current_weather_model.dart';
+import 'package:dvt_weather_app/data/models/weather_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'weather_state.freezed.dart';

@@ -11,4 +11,17 @@ extension WeatherTypesDesc on WeatherTypes {
         return "Sunny";
     }
   }
+
+  int get intValue {
+    switch (this) {
+      case WeatherTypes.cloudy:
+        return 2;
+      case WeatherTypes.rainy:
+        return 1;
+      case WeatherTypes.sunny:
+        return 3;
+      default:
+        return 1;
+    }
+  }
 }

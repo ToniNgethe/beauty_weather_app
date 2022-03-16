@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:dvt_weather_app/data/bloc/weather/weather_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
-import 'package:dvt_weather_app/data/models/current_weather_model.dart';
+import 'package:dvt_weather_app/data/models/weather_model.dart';
 import 'package:dvt_weather_app/di/injector.dart';
 import 'package:dvt_weather_app/ui/home/widgets/weather_error_widget.dart';
 import 'package:dvt_weather_app/ui/home/widgets/weather_loading_widget.dart';
