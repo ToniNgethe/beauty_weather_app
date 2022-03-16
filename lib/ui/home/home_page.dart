@@ -40,13 +40,9 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          '0',
-                          style:
-                              TextStyle(fontSize: 20.sp, color: Colors.white),
-                        ),
+                      Text(
+                        '°',
+                        style: TextStyle(fontSize: 50.sp, color: Colors.white),
                       )
                     ],
                   ),
