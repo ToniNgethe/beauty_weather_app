@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dvt_weather_app/data/bloc/location/Locations.dart';
+import 'package:dvt_weather_app/data/bloc/location/user_location.dart';
 import 'package:dvt_weather_app/data/bloc/location/location_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/location/location_state.dart';
 
@@ -13,7 +13,7 @@ import 'location_bloc_test.mocks.dart';
 
 @GenerateMocks([FakeUserLocation])
 void main() {
-  late Locations userLocation;
+  late UserLocations userLocation;
   late LocationBloc locationBloc;
 
   setUp(() {

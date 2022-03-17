@@ -1,8 +1,8 @@
-import 'package:dvt_weather_app/data/bloc/location/Locations.dart';
+import 'package:dvt_weather_app/data/bloc/location/user_location.dart';
 import 'package:geolocator_platform_interface/src/enums/location_permission.dart';
 import 'package:geolocator_platform_interface/src/models/position.dart';
 
-class FakeUserLocation implements Locations {
+class FakeUserLocation implements UserLocations {
   @override
   Future<LocationPermission> checkPermission() {
     // TODO: implement checkPermission

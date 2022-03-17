@@ -1,4 +1,4 @@
-import 'package:dvt_weather_app/data/bloc/location/Locations.dart';
+import 'package:dvt_weather_app/data/bloc/location/user_location.dart';
 import 'package:dvt_weather_app/data/bloc/location/location_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class LocationBloc extends Cubit<LocationState> {
-  Locations _userLocation;
+  final UserLocations _userLocation;
 
   LocationBloc(this._userLocation) : super(const LocationState.init());
 
