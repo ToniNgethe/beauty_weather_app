@@ -16,8 +16,10 @@ class WeatherModel {
   String? day;
   String savedDate = DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now());
   String? tag;
+  String? locationName;
 
   WeatherModel(this.id, this.max, this.min, this.temp, this.weather, this.tag,
+      this.locationName,
       {this.day}) {}
 }
 

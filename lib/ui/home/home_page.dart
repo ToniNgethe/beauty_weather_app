@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dvt_weather_app/data/bloc/weather/weather_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
 import 'package:dvt_weather_app/data/models/weather_model.dart';
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           thickness: 1,
         ),
         WeatherForecastWidget(
-          lastUpdated : currentWeatherModel.savedDate,
+          lastUpdated: currentWeatherModel.savedDate,
           position: _position!,
         )
       ],
@@ -86,6 +88,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Column(
               children: [
+                const SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,6 +110,15 @@ class _HomePageState extends State<HomePage> {
                   currentWeatherModel.weatherType.desc,
                   style: TextStyle(fontSize: 26.sp, color: Colors.white),
                 ),
+                if (currentWeatherModel.locationName != null ||
+                    currentWeatherModel.locationName != '')
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      currentWeatherModel.locationName ?? '',
+                      style: TextStyle(fontSize: 20.sp, color: Colors.white),
+                    ),
+                  ),
               ],
             )
           ],
