@@ -66,7 +66,7 @@ class _FavouriteWeatherPageState extends State<FavouriteWeatherPage> {
                                       Text(
                                         '${weatherModel.locationName}',
                                         style: TextStyle(
-                                          fontSize: 30.sp,
+                                          fontSize: 24.sp,
                                           color: Colors.white,
                                         ),
                                       ),

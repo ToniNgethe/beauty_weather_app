@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
 import 'package:dvt_weather_app/data/repositories/weather_repository.dart';

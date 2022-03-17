@@ -38,6 +38,9 @@ dev_dependencies:
   injectable_generator:
   freezed:
   floor_generator: ^1.2.0
+  bloc_test: 
+  test: ^1.19.5
+  mockito: ^5.1.0
 
 flutter:
   uses-material-design: true
