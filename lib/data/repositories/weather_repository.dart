@@ -1,3 +1,4 @@
+import 'package:dvt_weather_app/data/local/database.dart';
 import 'package:dvt_weather_app/data/repositories/dto/current_weather_dto_response.dart';
 import 'package:dvt_weather_app/data/models/weather_model.dart';
 import 'package:dvt_weather_app/data/network/api_provider.dart';
@@ -10,8 +11,9 @@ import 'package:intl/intl.dart';
 @Injectable(as: WeatherRepository)
 class WeatherRepositoryImpl implements WeatherRepository {
   ApiProvider _apiProvider;
+  WeatherAppDatabase _weatherAppDatabase;
 
-  WeatherRepositoryImpl(this._apiProvider);
+  WeatherRepositoryImpl(this._apiProvider, this._weatherAppDatabase);
 
   @override
   Future<WeatherModel> getTodayWeather(double? lat, double? long) async {
@@ -24,12 +26,19 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final response = await _apiProvider.get(url);
       final weatherDtoObject = CurrentWeatherDtoResponse.fromJson(response);
 
-      return WeatherModel(
+      final weatherModel = WeatherModel(
           null,
           weatherDtoObject.main?.tempMax?.toDouble(),
           weatherDtoObject.main?.tempMin?.toDouble(),
           weatherDtoObject.main?.temp?.toDouble(),
-          _getWeatherType(weatherDtoObject));
+          _getWeatherType(weatherDtoObject),
+          'current');
+
+      // delete existing and insert new data
+      await _weatherAppDatabase.weatherDao.deleteAllRecords();
+      await _weatherAppDatabase.weatherDao.insertWeatherModel(weatherModel);
+
+      return weatherModel;
     } catch (e) {
       rethrow;
     }
@@ -82,15 +91,41 @@ class WeatherRepositoryImpl implements WeatherRepository {
               element.main?.tempMin?.toDouble(),
               element.main?.temp?.toDouble(),
               _getWeatherType(element),
+              'forecast',
               day: day);
           weatherModelList[day] = weatherModel;
         }
       }
 
+      final weatherModels = weatherModelList.values.toList();
+      await _weatherAppDatabase.weatherDao.insertWeatherModels(weatherModels);
+
       // return modified list
       return weatherModelList.values.toList();
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<List<WeatherModel>?> getCachedForeCastWeather() async {
+    try {
+      final cacheForecastWeatherModel =
+          await _weatherAppDatabase.weatherDao.getWeatherModels('forecast');
+      return cacheForecastWeatherModel;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  @override
+  Future<WeatherModel?> getCachedTodayWeather() async {
+    try {
+      final cachedCurrentWeatherModel =
+          await _weatherAppDatabase.weatherDao.getWeatherModelByTag('current');
+      return cachedCurrentWeatherModel;
+    } catch (e) {
+      return null;
     }
   }
 }

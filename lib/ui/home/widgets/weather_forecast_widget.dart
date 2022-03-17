@@ -11,8 +11,10 @@ import 'package:geolocator/geolocator.dart';
 
 class WeatherForecastWidget extends StatelessWidget {
   final Position position;
+  final String? lastUpdated;
 
-  const WeatherForecastWidget({Key? key, required this.position})
+  const WeatherForecastWidget(
+      {Key? key, required this.position, this.lastUpdated})
       : super(key: key);
 
   @override
@@ -34,49 +36,60 @@ class WeatherForecastWidget extends StatelessWidget {
                   ),
               forecastWeather: (weather) {
                 return Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                '${weather![index].day}',
-                                style: TextStyle(
-                                    fontSize: 20.sp, color: Colors.white),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (ctx, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${weather![index].day}',
+                                      style: TextStyle(
+                                          fontSize: 20.sp, color: Colors.white),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Image.asset(
+                                      weather[index].icon,
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                  ),
+                                  Expanded(
+                                      child: Row(
+                                    children: [
+                                      const Spacer(),
+                                      Text(
+                                        '${weather[index].temp}',
+                                        style: TextStyle(
+                                            fontSize: 18.sp,
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        '°',
+                                        style: TextStyle(
+                                            fontSize: 18.sp,
+                                            color: Colors.white),
+                                      )
+                                    ],
+                                  ))
+                                ],
                               ),
-                            ),
-                            Expanded(
-                              child: Image.asset(
-                                weather[index].icon,
-                                height: 30,
-                                width: 30,
-                              ),
-                            ),
-                            Expanded(
-                                child: Row(
-                              children: [
-                                const Spacer(),
-                                Text(
-                                  '${weather[index].temp}',
-                                  style: TextStyle(
-                                      fontSize: 18.sp, color: Colors.white),
-                                ),
-                                Text(
-                                  '°',
-                                  style: TextStyle(
-                                      fontSize: 18.sp, color: Colors.white),
-                                )
-                              ],
-                            ))
-                          ],
+                            );
+                          },
+                          itemCount: weather?.length,
                         ),
-                      );
-                    },
-                    itemCount: weather?.length,
+                      ),
+                      if (lastUpdated != null)
+                        SafeArea(child: Text('Last updated : $lastUpdated'))
+                    ],
                   ),
                 );
               });

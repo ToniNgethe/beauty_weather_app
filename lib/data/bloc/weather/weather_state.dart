@@ -11,7 +11,9 @@ class WeatherState with _$WeatherState {
 
   const factory WeatherState.error(String message) = WeatherErrorState;
 
-  const factory WeatherState.todayWeather(WeatherModel currentWeatherModel) = WeatherTodayState;
+  const factory WeatherState.todayWeather(WeatherModel currentWeatherModel) =
+      WeatherTodayState;
+
   const factory WeatherState.forecastWeather(
       List<WeatherModel>? forecastWeatherModel) = WeatherForecastState;
 }

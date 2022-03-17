@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
           thickness: 1,
         ),
         WeatherForecastWidget(
+          lastUpdated : currentWeatherModel.savedDate,
           position: _position!,
         )
       ],

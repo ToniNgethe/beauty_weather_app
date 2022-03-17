@@ -12,20 +12,43 @@ class WeatherBloc extends Cubit<WeatherState> {
   void fetchWeatherInfo(double? lat, double? long) async {
     try {
       emit(const WeatherState.loading());
+      // check if there is any cached data
+      final cachedCurrent = await _weatherRepository.getCachedTodayWeather();
+      if (cachedCurrent != null) emit(WeatherState.todayWeather(cachedCurrent));
+      // make network call
       final response = await _weatherRepository.getTodayWeather(lat, long);
+      // // display fresh data
       emit(WeatherState.todayWeather(response));
     } catch (e) {
-      emit(const WeatherState.error("Unable to fetch today's weather"));
+      // in case of an error display cached data
+      final cachedCurrent = await _weatherRepository.getCachedTodayWeather();
+      if (cachedCurrent != null) {
+        emit(WeatherState.todayWeather(cachedCurrent));
+      } else {
+        emit(const WeatherState.error("Unable to fetch today's weather"));
+      }
     }
   }
 
   void fetchForecastWeather(double? lat, double? long) async {
     try {
       emit(const WeatherState.loading());
+      final cachedForecast =
+          await _weatherRepository.getCachedForeCastWeather();
+      if (cachedForecast!.isNotEmpty) {
+        emit(WeatherState.forecastWeather(cachedForecast));
+      }
       final response = await _weatherRepository.getFiveDaysWeather(lat, long);
       emit(WeatherState.forecastWeather(response));
     } catch (e) {
-      emit(const WeatherState.error("Unable to fetch today's weather"));
+      // in case of an error display cached data
+      final cachedForecast =
+          await _weatherRepository.getCachedForeCastWeather();
+      if (cachedForecast!.isNotEmpty) {
+        emit(WeatherState.forecastWeather(cachedForecast));
+      } else {
+        emit(const WeatherState.error("Unable to fetch today's weather"));
+      }
     }
   }
 }

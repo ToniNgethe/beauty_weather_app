@@ -6,15 +6,15 @@ abstract class WeatherDao {
   @insert
   Future<void> insertWeatherModel(WeatherModel weatherModel);
 
-  @update
-  Future<void> updateWeatherModel(WeatherModel weatherModel);
-
   @insert
   Future<void> insertWeatherModels(List<WeatherModel> weatherModel);
 
-  @update
-  Future<void> updateWeatherModels(List<WeatherModel> weatherModel);
+  @Query("DELETE FROM WeatherModel")
+  Future<void> deleteAllRecords();
 
-  @delete
-  Future<void> deleteAll(List<WeatherModel> weatherModel);
+  @Query("SELECT * FROM WeatherModel WHERE tag = :tag")
+  Future<WeatherModel?> getWeatherModelByTag(String tag);
+
+  @Query("SELECT * FROM WeatherModel WHERE tag = :tag")
+  Future<List<WeatherModel>?> getWeatherModels(String tag);
 }
