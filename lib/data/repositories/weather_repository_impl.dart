@@ -33,7 +33,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
           weatherDtoObject.main?.tempMax?.toDouble(),
           weatherDtoObject.main?.tempMin?.toDouble(),
           weatherDtoObject.main?.temp?.toDouble(),
-          _getWeatherType(weatherDtoObject),
+          getWeatherType(weatherDtoObject),
           'current',
           weatherDtoObject.name ?? '',
           DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()));
@@ -45,12 +45,11 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
       return weatherModel;
     } catch (e) {
-      log("---> ${e.toString()}");
       rethrow;
     }
   }
 
-  int _getWeatherType(CurrentWeatherDtoResponse currentWeatherDtoResponse) {
+  int getWeatherType(CurrentWeatherDtoResponse currentWeatherDtoResponse) {
     // if no weather return sunny by default
     if (currentWeatherDtoResponse.weather?.isEmpty == true) {
       return WeatherTypes.sunny.intValue;
@@ -96,7 +95,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
               element.main?.tempMax?.toDouble(),
               element.main?.tempMin?.toDouble(),
               element.main?.temp?.toDouble(),
-              _getWeatherType(element),
+              getWeatherType(element),
               'forecast',
               element.name ?? '',
               DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()),
@@ -171,7 +170,6 @@ class WeatherRepositoryImpl implements WeatherRepository {
         await _weatherAppDatabase.weatherDao.insertWeatherModel(weatherModel);
       }
     } catch (e) {
-      log('---> ${e}');
       rethrow;
     }
   }

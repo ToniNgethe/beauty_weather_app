@@ -25,4 +25,7 @@ abstract class WeatherDao {
 
   @Query("SELECT * FROM WeatherModel WHERE tag = :tag")
   Future<List<WeatherModel>?> getWeatherModels(String tag);
+
+  @Query('SELECT * FROM WeatherModel WHERE id = :id')
+  Future<WeatherModel?> findWeatherById(int id);
 }

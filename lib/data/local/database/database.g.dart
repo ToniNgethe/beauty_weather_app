@@ -197,6 +197,22 @@ class _$WeatherDao extends WeatherDao {
   }
 
   @override
+  Future<WeatherModel?> findWeatherById(int id) async {
+    return _queryAdapter.query('SELECT * FROM WeatherModel WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => WeatherModel(
+            row['id'] as int?,
+            row['max'] as double?,
+            row['min'] as double?,
+            row['temp'] as double?,
+            row['weather'] as int?,
+            row['tag'] as String?,
+            row['locationName'] as String?,
+            row['savedDate'] as String?,
+            day: row['day'] as String?),
+        arguments: [id]);
+  }
+
+  @override
   Future<void> insertWeatherModel(WeatherModel weatherModel) async {
     await _weatherModelInsertionAdapter.insert(
         weatherModel, OnConflictStrategy.abort);
