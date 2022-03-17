@@ -16,4 +16,6 @@ class WeatherState with _$WeatherState {
 
   const factory WeatherState.forecastWeather(
       List<WeatherModel>? forecastWeatherModel) = WeatherForecastState;
+
+  const factory WeatherState.notifyUser(String message) = WeatherNotifyState;
 }

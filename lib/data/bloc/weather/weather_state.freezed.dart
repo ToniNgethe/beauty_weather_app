@@ -43,6 +43,12 @@ class _$WeatherStateTearOff {
       forecastWeatherModel,
     );
   }
+
+  WeatherNotifyState notifyUser(String message) {
+    return WeatherNotifyState(
+      message,
+    );
+  }
 }
 
 /// @nodoc
@@ -58,6 +64,7 @@ mixin _$WeatherState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +74,7 @@ mixin _$WeatherState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,6 +84,7 @@ mixin _$WeatherState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +95,7 @@ mixin _$WeatherState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +105,7 @@ mixin _$WeatherState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +115,7 @@ mixin _$WeatherState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -172,6 +184,7 @@ class _$WeatherInitState implements WeatherInitState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) {
     return init();
   }
@@ -184,6 +197,7 @@ class _$WeatherInitState implements WeatherInitState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) {
     return init?.call();
   }
@@ -196,6 +210,7 @@ class _$WeatherInitState implements WeatherInitState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -212,6 +227,7 @@ class _$WeatherInitState implements WeatherInitState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) {
     return init(this);
   }
@@ -224,6 +240,7 @@ class _$WeatherInitState implements WeatherInitState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) {
     return init?.call(this);
   }
@@ -236,6 +253,7 @@ class _$WeatherInitState implements WeatherInitState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -296,6 +314,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) {
     return loading();
   }
@@ -308,6 +327,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) {
     return loading?.call();
   }
@@ -320,6 +340,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -336,6 +357,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) {
     return loading(this);
   }
@@ -348,6 +370,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) {
     return loading?.call(this);
   }
@@ -360,6 +383,7 @@ class _$WeatherLoadingState implements WeatherLoadingState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -444,6 +468,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) {
     return error(message);
   }
@@ -456,6 +481,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) {
     return error?.call(message);
   }
@@ -468,6 +494,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -484,6 +511,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) {
     return error(this);
   }
@@ -496,6 +524,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) {
     return error?.call(this);
   }
@@ -508,6 +537,7 @@ class _$WeatherErrorState implements WeatherErrorState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -598,6 +628,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) {
     return todayWeather(currentWeatherModel);
   }
@@ -610,6 +641,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) {
     return todayWeather?.call(currentWeatherModel);
   }
@@ -622,6 +654,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) {
     if (todayWeather != null) {
@@ -638,6 +671,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) {
     return todayWeather(this);
   }
@@ -650,6 +684,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) {
     return todayWeather?.call(this);
   }
@@ -662,6 +697,7 @@ class _$WeatherTodayState implements WeatherTodayState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) {
     if (todayWeather != null) {
@@ -754,6 +790,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     required TResult Function(WeatherModel currentWeatherModel) todayWeather,
     required TResult Function(List<WeatherModel>? forecastWeatherModel)
         forecastWeather,
+    required TResult Function(String message) notifyUser,
   }) {
     return forecastWeather(forecastWeatherModel);
   }
@@ -766,6 +803,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
   }) {
     return forecastWeather?.call(forecastWeatherModel);
   }
@@ -778,6 +816,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     TResult Function(String message)? error,
     TResult Function(WeatherModel currentWeatherModel)? todayWeather,
     TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
     required TResult orElse(),
   }) {
     if (forecastWeather != null) {
@@ -794,6 +833,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     required TResult Function(WeatherErrorState value) error,
     required TResult Function(WeatherTodayState value) todayWeather,
     required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
   }) {
     return forecastWeather(this);
   }
@@ -806,6 +846,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
   }) {
     return forecastWeather?.call(this);
   }
@@ -818,6 +859,7 @@ class _$WeatherForecastState implements WeatherForecastState {
     TResult Function(WeatherErrorState value)? error,
     TResult Function(WeatherTodayState value)? todayWeather,
     TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
     required TResult orElse(),
   }) {
     if (forecastWeather != null) {
@@ -834,5 +876,164 @@ abstract class WeatherForecastState implements WeatherState {
   List<WeatherModel>? get forecastWeatherModel;
   @JsonKey(ignore: true)
   $WeatherForecastStateCopyWith<WeatherForecastState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WeatherNotifyStateCopyWith<$Res> {
+  factory $WeatherNotifyStateCopyWith(
+          WeatherNotifyState value, $Res Function(WeatherNotifyState) then) =
+      _$WeatherNotifyStateCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$WeatherNotifyStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res>
+    implements $WeatherNotifyStateCopyWith<$Res> {
+  _$WeatherNotifyStateCopyWithImpl(
+      WeatherNotifyState _value, $Res Function(WeatherNotifyState) _then)
+      : super(_value, (v) => _then(v as WeatherNotifyState));
+
+  @override
+  WeatherNotifyState get _value => super._value as WeatherNotifyState;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(WeatherNotifyState(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$WeatherNotifyState implements WeatherNotifyState {
+  const _$WeatherNotifyState(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'WeatherState.notifyUser(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is WeatherNotifyState &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  $WeatherNotifyStateCopyWith<WeatherNotifyState> get copyWith =>
+      _$WeatherNotifyStateCopyWithImpl<WeatherNotifyState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function(WeatherModel currentWeatherModel) todayWeather,
+    required TResult Function(List<WeatherModel>? forecastWeatherModel)
+        forecastWeather,
+    required TResult Function(String message) notifyUser,
+  }) {
+    return notifyUser(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function(WeatherModel currentWeatherModel)? todayWeather,
+    TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
+  }) {
+    return notifyUser?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function(WeatherModel currentWeatherModel)? todayWeather,
+    TResult Function(List<WeatherModel>? forecastWeatherModel)? forecastWeather,
+    TResult Function(String message)? notifyUser,
+    required TResult orElse(),
+  }) {
+    if (notifyUser != null) {
+      return notifyUser(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WeatherInitState value) init,
+    required TResult Function(WeatherLoadingState value) loading,
+    required TResult Function(WeatherErrorState value) error,
+    required TResult Function(WeatherTodayState value) todayWeather,
+    required TResult Function(WeatherForecastState value) forecastWeather,
+    required TResult Function(WeatherNotifyState value) notifyUser,
+  }) {
+    return notifyUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WeatherInitState value)? init,
+    TResult Function(WeatherLoadingState value)? loading,
+    TResult Function(WeatherErrorState value)? error,
+    TResult Function(WeatherTodayState value)? todayWeather,
+    TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
+  }) {
+    return notifyUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WeatherInitState value)? init,
+    TResult Function(WeatherLoadingState value)? loading,
+    TResult Function(WeatherErrorState value)? error,
+    TResult Function(WeatherTodayState value)? todayWeather,
+    TResult Function(WeatherForecastState value)? forecastWeather,
+    TResult Function(WeatherNotifyState value)? notifyUser,
+    required TResult orElse(),
+  }) {
+    if (notifyUser != null) {
+      return notifyUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WeatherNotifyState implements WeatherState {
+  const factory WeatherNotifyState(String message) = _$WeatherNotifyState;
+
+  String get message;
+  @JsonKey(ignore: true)
+  $WeatherNotifyStateCopyWith<WeatherNotifyState> get copyWith =>
       throw _privateConstructorUsedError;
 }

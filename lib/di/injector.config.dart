@@ -14,9 +14,9 @@ import '../data/local/database/database.dart' as _i5;
 import '../data/local/database/database_module.dart' as _i11;
 import '../data/network/api_provider.dart' as _i6;
 import '../data/network/dio_client.dart' as _i10;
-import '../data/repositories/weather_repository.dart' as _i8;
+import '../data/repositories/weather_repository.dart' as _i7;
 import '../data/repositories/weather_repository_impl.dart'
-    as _i7; // ignore_for_file: unnecessary_lambdas
+    as _i8; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]

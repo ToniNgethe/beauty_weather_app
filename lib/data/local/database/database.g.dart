@@ -123,8 +123,10 @@ class _$WeatherDao extends WeatherDao {
   final InsertionAdapter<WeatherModel> _weatherModelInsertionAdapter;
 
   @override
-  Future<void> deleteAllRecords() async {
-    await _queryAdapter.queryNoReturn('DELETE FROM WeatherModel');
+  Future<void> deleteAllRecords(String tag1, String tag2) async {
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM WeatherModel where tag = ?1 OR tag = ?2',
+        arguments: [tag1, tag2]);
   }
 
   @override

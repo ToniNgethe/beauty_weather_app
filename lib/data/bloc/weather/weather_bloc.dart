@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
-import 'package:dvt_weather_app/data/repositories/weather_repository_impl.dart';
+import 'package:dvt_weather_app/data/repositories/weather_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -49,6 +51,16 @@ class WeatherBloc extends Cubit<WeatherState> {
       } else {
         emit(const WeatherState.error("Unable to fetch today's weather"));
       }
+    }
+  }
+
+  void markWeatherAsFavourite() async {
+    try {
+      emit(const WeatherState.loading());
+      await _weatherRepository.markWeatherAsFavourite();
+      emit(const WeatherState.notifyUser('Weather info marked as favourite'));
+    } catch (e) {
+      emit(const WeatherState.error("Unable to mark weather as favorite"));
     }
   }
 }

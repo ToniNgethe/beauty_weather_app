@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dvt_weather_app/data/bloc/weather/weather_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
 import 'package:dvt_weather_app/data/models/weather_model.dart';
+import 'package:dvt_weather_app/di/injector.dart';
 import 'package:dvt_weather_app/ui/home/widgets/weather_error_widget.dart';
 import 'package:dvt_weather_app/ui/home/widgets/weather_forecast_widget.dart';
 import 'package:dvt_weather_app/ui/home/widgets/weather_loading_widget.dart';
@@ -21,6 +24,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Position? _position;
+
+  bool _isFavourite = false;
 
   @override
   void didChangeDependencies() {
@@ -45,21 +50,12 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite_border,
-                  ),
-                ),
-              )
-            ],
+            actions: [_buildMarkFavourite()],
             leading: IconButton(
               onPressed: () {},
               icon: const Icon(
                 Icons.list,
+                color: Colors.white,
               ),
             ),
           ),
@@ -76,6 +72,38 @@ class _HomePageState extends State<HomePage> {
               todayWeather: (weather) => _buildWeatherWidget(weather)),
         );
       },
+    );
+  }
+
+  Widget _buildMarkFavourite() {
+    return BlocProvider(
+      create: (ctx) => getIt<WeatherBloc>(),
+      child: BlocConsumer<WeatherBloc, WeatherState>(
+        listener: (ctx, state) {
+          state.maybeWhen(
+              orElse: () {},
+              notifyUser: (message) {
+                final snackBar = SnackBar(content: Text(message));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                _isFavourite = !_isFavourite;
+                setState(() {});
+              });
+        },
+        builder: (ctx, state) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () {
+                ctx.read<WeatherBloc>().markWeatherAsFavourite();
+              },
+              icon: Icon(
+                _isFavourite ? Icons.favorite : Icons.favorite_border,
+                color: _isFavourite ? Colors.red : Colors.white,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
