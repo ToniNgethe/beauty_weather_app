@@ -10,4 +10,6 @@ abstract class WeatherRepository {
   Future<List<WeatherModel>> getFiveDaysWeather(double? lat, double? lon);
 
   Future markWeatherAsFavourite();
+
+  Future<List<WeatherModel>?> getAllFavWeather();
 }

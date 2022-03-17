@@ -63,4 +63,19 @@ class WeatherBloc extends Cubit<WeatherState> {
       emit(const WeatherState.error("Unable to mark weather as favorite"));
     }
   }
+
+  void fetchFavouriteWeatherInfo() async {
+    try {
+      emit(const WeatherState.loading());
+      final favs = await _weatherRepository.getAllFavWeather();
+      if (favs!.isEmpty) {
+        throw 'No marked favourite weather info found. Click the heart symbol on'
+            'the home page to get started';
+      } else {
+        emit(WeatherState.favWeather(favs));
+      }
+    } catch (e) {
+      emit(WeatherState.error(e.toString()));
+    }
+  }
 }

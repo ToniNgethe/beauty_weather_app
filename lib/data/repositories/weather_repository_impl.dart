@@ -160,4 +160,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<WeatherModel>?> getAllFavWeather() async {
+    try {
+      final favs =
+          await _weatherAppDatabase.weatherDao.getWeatherModels('favourite');
+      return favs;
+    } catch (e) {
+      return [];
+    }
+  }
 }
