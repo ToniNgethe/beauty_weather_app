@@ -222,7 +222,8 @@ void main() {
 
   group('#fetchFavouriteWeatherInfo tests', () {
     blocTest(
-        'emit [WeatherState.loading] and [WeatherState.favWeather] when request is a successs',
+        'emit [WeatherState.loading] and [WeatherState.favWeather] '
+        'when request is a successs',
         build: () => weatherBloc,
         act: (WeatherBloc weatherBloc) {
           when(mockWeatherRepository.getAllFavWeather())

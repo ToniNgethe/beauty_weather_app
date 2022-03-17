@@ -1,16 +1,26 @@
-# dvt_weather_app
+# DVT weather app
 
-A new Flutter project.
+A beautiful weather app built using flutter. Enjoy
+
+## Features
+With the app you can achieve the following:
+1. Get today's weather data
+2. The next 5 days weather forecast of your location
+3. Save and view your favourite location weather
+
+## Architecture
+The app is built using the ``Bloc archietcure`` and the following libraries:
+- ``floor db``: used to store the weather information for offline support
+-  ``dio`` : making requests to openweather
+- ``geolocator``: to get coordinates of your current location
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clone the app and run
+```dart
+flutter pub get;
+flutter run;
+```
+To run the tests, use:
+```dart
+flutter test;
+```
