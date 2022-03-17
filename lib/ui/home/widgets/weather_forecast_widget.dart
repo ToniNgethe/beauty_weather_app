@@ -40,10 +40,11 @@ class WeatherForecastWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
+                          padding: EdgeInsets.zero,
                           itemBuilder: (ctx, index) {
                             return Padding(
                               padding: const EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 20),
+                                  left: 20, right: 20, bottom: 20, top: 5),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

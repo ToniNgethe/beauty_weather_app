@@ -1,4 +1,4 @@
-import 'package:dvt_weather_app/data/local/database.dart';
+import 'package:dvt_weather_app/data/local/database/database.dart';
 import 'package:injectable/injectable.dart';
 
 @module

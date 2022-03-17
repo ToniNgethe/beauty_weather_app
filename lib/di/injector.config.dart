@@ -10,8 +10,8 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../data/bloc/location/location_bloc.dart' as _i4;
 import '../data/bloc/weather/weather_bloc.dart' as _i9;
-import '../data/local/database.dart' as _i5;
-import '../data/local/database_module.dart' as _i11;
+import '../data/local/database/database.dart' as _i5;
+import '../data/local/database/database_module.dart' as _i11;
 import '../data/network/api_provider.dart' as _i6;
 import '../data/network/dio_client.dart' as _i10;
 import '../data/repositories/weather_repository.dart' as _i8;

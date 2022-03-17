@@ -82,7 +82,7 @@ class _$WeatherAppDatabase extends WeatherAppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `WeatherModel` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `weather` INTEGER, `temp` REAL, `min` REAL, `max` REAL, `day` TEXT, `savedDate` TEXT NOT NULL, `tag` TEXT, `locationName` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `WeatherModel` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `weather` INTEGER, `temp` REAL, `min` REAL, `max` REAL, `day` TEXT, `savedDate` TEXT, `tag` TEXT, `locationName` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -138,6 +138,7 @@ class _$WeatherDao extends WeatherDao {
             row['weather'] as int?,
             row['tag'] as String?,
             row['locationName'] as String?,
+            row['savedDate'] as String?,
             day: row['day'] as String?),
         arguments: [tag]);
   }
@@ -153,6 +154,7 @@ class _$WeatherDao extends WeatherDao {
             row['weather'] as int?,
             row['tag'] as String?,
             row['locationName'] as String?,
+            row['savedDate'] as String?,
             day: row['day'] as String?),
         arguments: [tag]);
   }

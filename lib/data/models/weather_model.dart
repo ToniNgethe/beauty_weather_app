@@ -3,7 +3,6 @@ import 'package:dvt_weather_app/utils/assets.dart';
 import 'package:dvt_weather_app/utils/weather_types.dart';
 import 'package:floor/floor.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 @entity
 class WeatherModel {
@@ -14,12 +13,13 @@ class WeatherModel {
   double? min;
   double? max;
   String? day;
-  String savedDate = DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now());
+  String? savedDate;
   String? tag;
   String? locationName;
 
   WeatherModel(this.id, this.max, this.min, this.temp, this.weather, this.tag,
       this.locationName,
+      this.savedDate,
       {this.day}) {}
 }
 

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:dvt_weather_app/data/local/database.dart';
+import 'package:dvt_weather_app/data/local/database/database.dart';
 import 'package:dvt_weather_app/data/repositories/dto/current_weather_dto_response.dart';
 import 'package:dvt_weather_app/data/models/weather_model.dart';
 import 'package:dvt_weather_app/data/network/api_provider.dart';
@@ -27,17 +27,17 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
       final response = await _apiProvider.get(url);
       final weatherDtoObject = CurrentWeatherDtoResponse.fromJson(response);
-      log("--> ${weatherDtoObject.name}");
+
       final weatherModel = WeatherModel(
-        null,
-        weatherDtoObject.main?.tempMax?.toDouble(),
-        weatherDtoObject.main?.tempMin?.toDouble(),
-        weatherDtoObject.main?.temp?.toDouble(),
-        _getWeatherType(weatherDtoObject),
-        'current',
-        weatherDtoObject.name ?? '',
-      );
-      log("--> ${weatherModel.locationName}");
+          null,
+          weatherDtoObject.main?.tempMax?.toDouble(),
+          weatherDtoObject.main?.tempMin?.toDouble(),
+          weatherDtoObject.main?.temp?.toDouble(),
+          _getWeatherType(weatherDtoObject),
+          'current',
+          weatherDtoObject.name ?? '',
+          DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()));
+
       // delete existing and insert new data
       await _weatherAppDatabase.weatherDao.deleteAllRecords();
       await _weatherAppDatabase.weatherDao.insertWeatherModel(weatherModel);
@@ -97,6 +97,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
               _getWeatherType(element),
               'forecast',
               element.name ?? '',
+              DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()),
               day: day);
           weatherModelList[day] = weatherModel;
         }
