@@ -60,7 +60,7 @@ class WeatherBloc extends Cubit<WeatherState> {
       await _weatherRepository.markWeatherAsFavourite();
       emit(const WeatherState.notifyUser('Weather info marked as favourite'));
     } catch (e) {
-      emit(const WeatherState.error("Unable to mark weather as favorite"));
+      emit(const WeatherState.notifyUser("Unable to mark weather as favorite"));
     }
   }
 

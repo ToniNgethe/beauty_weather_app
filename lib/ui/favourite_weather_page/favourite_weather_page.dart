@@ -58,13 +58,28 @@ class _FavouriteWeatherPageState extends State<FavouriteWeatherPage> {
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Text(
-                                    '${weatherModel.locationName}',
-                                    style: TextStyle(
-                                      fontSize: 30.sp,
-                                      color: Colors.white,
-                                    ),
+                                  padding: const EdgeInsets.all(6),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${weatherModel.locationName}',
+                                        style: TextStyle(
+                                          fontSize: 30.sp,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        '${weatherModel.savedDate}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12.sp),
+                                      )
+                                    ],
                                   ),
                                 ),
                                 const Spacer(),

@@ -143,20 +143,35 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final cachedCurrentWeatherModel =
           await _weatherAppDatabase.weatherDao.getWeatherModelByTag('current');
 
-      // use tag - favourite
-      final weatherModel = WeatherModel(
-          null,
-          cachedCurrentWeatherModel?.max,
-          cachedCurrentWeatherModel?.min,
-          cachedCurrentWeatherModel?.temp,
-          cachedCurrentWeatherModel?.weather,
-          'favourite',
-          cachedCurrentWeatherModel?.locationName ?? '',
-          DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()));
+      // check if it already exists
+      final existingSavedWeatherModel = await _weatherAppDatabase.weatherDao
+          .getWeatherByLocationName(
+              cachedCurrentWeatherModel!.locationName!, 'favourite');
+      if (existingSavedWeatherModel != null) {
+        // update it
+        existingSavedWeatherModel.max = cachedCurrentWeatherModel.max;
+        existingSavedWeatherModel.min = cachedCurrentWeatherModel.min;
+        existingSavedWeatherModel.temp = cachedCurrentWeatherModel.temp;
+        existingSavedWeatherModel.savedDate =
+            DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now());
+        await _weatherAppDatabase.weatherDao
+            .updateWeatherModel(existingSavedWeatherModel);
+      } else {
+        // use tag - favourite
+        final weatherModel = WeatherModel(
+            null,
+            cachedCurrentWeatherModel.max,
+            cachedCurrentWeatherModel.min,
+            cachedCurrentWeatherModel.temp,
+            cachedCurrentWeatherModel.weather,
+            'favourite',
+            cachedCurrentWeatherModel.locationName ?? '',
+            DateFormat("dd MMM, yyyy HH:mm a").format(DateTime.now()));
 
-      await _weatherAppDatabase.weatherDao.insertWeatherModel(weatherModel);
+        await _weatherAppDatabase.weatherDao.insertWeatherModel(weatherModel);
+      }
     } catch (e) {
-      log(e.toString());
+      log('---> ${e}');
       rethrow;
     }
   }

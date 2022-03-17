@@ -112,6 +112,21 @@ class _$WeatherDao extends WeatherDao {
                   'savedDate': item.savedDate,
                   'tag': item.tag,
                   'locationName': item.locationName
+                }),
+        _weatherModelUpdateAdapter = UpdateAdapter(
+            database,
+            'WeatherModel',
+            ['id'],
+            (WeatherModel item) => <String, Object?>{
+                  'id': item.id,
+                  'weather': item.weather,
+                  'temp': item.temp,
+                  'min': item.min,
+                  'max': item.max,
+                  'day': item.day,
+                  'savedDate': item.savedDate,
+                  'tag': item.tag,
+                  'locationName': item.locationName
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -121,6 +136,8 @@ class _$WeatherDao extends WeatherDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<WeatherModel> _weatherModelInsertionAdapter;
+
+  final UpdateAdapter<WeatherModel> _weatherModelUpdateAdapter;
 
   @override
   Future<void> deleteAllRecords(String tag1, String tag2) async {
@@ -143,6 +160,24 @@ class _$WeatherDao extends WeatherDao {
             row['savedDate'] as String?,
             day: row['day'] as String?),
         arguments: [tag]);
+  }
+
+  @override
+  Future<WeatherModel?> getWeatherByLocationName(
+      String locationName, String tag) async {
+    return _queryAdapter.query(
+        'SELECT * FROM WeatherModel WHERE locationName = ?1 AND tag = ?2',
+        mapper: (Map<String, Object?> row) => WeatherModel(
+            row['id'] as int?,
+            row['max'] as double?,
+            row['min'] as double?,
+            row['temp'] as double?,
+            row['weather'] as int?,
+            row['tag'] as String?,
+            row['locationName'] as String?,
+            row['savedDate'] as String?,
+            day: row['day'] as String?),
+        arguments: [locationName, tag]);
   }
 
   @override
@@ -170,6 +205,12 @@ class _$WeatherDao extends WeatherDao {
   @override
   Future<void> insertWeatherModels(List<WeatherModel> weatherModel) async {
     await _weatherModelInsertionAdapter.insertList(
+        weatherModel, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateWeatherModel(WeatherModel weatherModel) async {
+    await _weatherModelUpdateAdapter.update(
         weatherModel, OnConflictStrategy.abort);
   }
 }
