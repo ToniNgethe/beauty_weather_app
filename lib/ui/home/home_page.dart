@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dvt_weather_app/data/bloc/weather/weather_bloc.dart';
 import 'package:dvt_weather_app/data/bloc/weather/weather_state.dart';
 import 'package:dvt_weather_app/data/models/weather_model.dart';
@@ -43,6 +41,28 @@ class _HomePageState extends State<HomePage> {
       listener: (ctx, state) {},
       builder: (ctx, state) {
         return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite_border,
+                  ),
+                ),
+              )
+            ],
+            leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.list,
+              ),
+            ),
+          ),
           backgroundColor: state.maybeWhen(
               orElse: () => Colors.white,
               todayWeather: (weather) => weather.color),
@@ -88,7 +108,9 @@ class _HomePageState extends State<HomePage> {
             ),
             Column(
               children: [
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

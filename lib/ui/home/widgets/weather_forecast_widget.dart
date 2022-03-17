@@ -89,10 +89,14 @@ class WeatherForecastWidget extends StatelessWidget {
                       ),
                       if (lastUpdated != null)
                         SafeArea(
-                            child: Text(
-                          'Last updated : $lastUpdated',
-                          style: const TextStyle(color: Colors.white),
-                        ))
+                            top: false,
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Text(
+                                'Last updated : $lastUpdated',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ))
                     ],
                   ),
                 );
