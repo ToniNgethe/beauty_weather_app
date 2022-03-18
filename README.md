@@ -17,10 +17,10 @@ The app is built using the ``Bloc archietcure`` and the following libraries:
 ## Getting Started
 Clone the app and run
 ```dart
-flutter pub get;
-flutter run;
+flutter pub get
+flutter run
 ```
 To run the tests, use:
 ```dart
-flutter test;
+flutter test
 ```
