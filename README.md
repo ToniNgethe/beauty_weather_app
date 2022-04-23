@@ -1,6 +1,8 @@
-# DVT weather app
+# Beauty weather app
 
 A beautiful weather app built using flutter. Enjoy
+
+![group_235](https://user-images.githubusercontent.com/23453229/164944386-38202c0b-e252-4ba2-b749-56c73aa845ca.png)
 
 ## Features
 With the app you can achieve the following:
